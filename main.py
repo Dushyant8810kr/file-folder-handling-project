@@ -19,7 +19,7 @@ def create_folder():
     except Exception as err:                                            # if there is any issue in folder creation then this will handle this.
         print("Your folder is already exist!!")                         # simply prints taht your file is already exist.
 
-def read_Folder():
+def read_folder():
     p = Path("")
     count = 1                                                           # for indexing purpose for folder or file
     for item in os.listdir(p) :                                         # os.listdir(p) ->get all files/folders
@@ -28,13 +28,32 @@ def read_Folder():
         print(f"{count}",item)                                          # print the file/folder with count
         count+=1
         
+def update_folder():
+    try:
+        read_folder()                                                           # providing the files and folders name
+        name = input("Enter your folder name that you want to update : ")       # taking folder name input from user for rename the preexisting file
+        p = Path(name)                                                          # store path of it in a variable 
+        if p.exists() and p.is_dir():                                           # checking the condition tat the inputed folder name is exist or not
+            new_name = input("Enter new name of the folder : ")                 # taking folder new name as input from user
+            p.rename(new_name)                                                  # changing the folder/file name
+            print(f"Your folder succesfully update to {new_name}")              
+        else:
+            print("Your folder does not exist")
+    except Exception as err:
+        print(f"showing error as {err}")
+
 
 
 if option==1:
     create_folder()
 
 if option==2:
-    read_Folder()
+    read_folder()
+
+if option==3:
+    update_folder()
+
+
 
 
 
