@@ -6,9 +6,9 @@ print("1. Create a folder.")
 print("2. Read files and folders.")
 print("3. Update the folder.")
 print("4. Delte te folder.")
-print("5. creating a file.")
-print("6. update the file.")
-print("7. Delete the file.")
+print("5. create a file.")
+print("6. read a file.")
+print("7. Update a file.")
 
 
 option = int(input("Choose an option : "))
@@ -80,6 +80,45 @@ def create_file():
     except Exception as err:
         print(f"Error as {err}")
 
+def read_file():
+    try:
+        read_folder()                                                           # providing the files and folders name
+        name = input("Enter the name of file that you want to Read : ")         # taking folder name input from user for rename the preexisting file
+        p = Path(name)                                                          # store path of it in a variable
+        if p.exists() and p.is_file():                                          # checking the condition that the inputed folder name is exist or not
+            with open(name,'r') as file:                                        # creating file as in read mode
+                print(file.read())                                              # simpy prints tha data that are in inputed name file
+    except Exception as err:
+        print(f"Error as {err}")
+
+
+def update__file():
+    try:
+        read_folder()
+        name = input("Enter the name of file that you want to Read : ")
+        p = Path(name)
+        if p.exists() and p.is_file():
+            print("1. Rename the file\n2. Append in file\n3. Overwrite in file")
+            opt = int(input("Enter : "))
+            if opt == 1 :
+                new_name = input("Enter the new name : ")
+                p.rename(new_name)
+                print("Name of file successfully changed.")
+            if opt == 2 :
+                with open(name,'a') as file:
+                    data = input("Enter the data that append to file : ")
+                    file.write(" "+data)
+                    print("Append operation is succesfully done.")
+            if opt == 3 :
+                with open(name,'w') as file:
+                    data = input("Enter the data that overwrite to file : ")
+                    file.write(data)
+                    print("overwrite operation is succesfully done.")
+                    
+    except Exception as err:
+        print(f"Error as {err}")
+
+
 
 
 
@@ -98,6 +137,12 @@ if option ==4:
 
 if option==5:
     create_file()
+
+if option==6:
+    read_file()
+
+if option==7:
+    update__file()
 
 
 
